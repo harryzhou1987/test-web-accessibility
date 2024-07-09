@@ -1,0 +1,27 @@
+name: "test-web-accessibility"
+description: "Test Website Accessibility From Github Action Workflow"
+author: Harry Zhou
+branding:
+  icon: "activity"
+  color: "orange"
+
+inputs:
+  URLs:
+    description: "URL List"
+    required: true
+    default: ""
+  ERROR_THRESHOLD:
+    description: "Action fails when number of errors exceeds the threshold."
+    required: true
+    default: "0"
+
+outputs:
+  time:
+    description: "The datetime the task finishes."
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.URLs }}
+    - ${{ inputs.ERROR_THRESHOLD }}
