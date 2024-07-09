@@ -8,7 +8,7 @@ from datetime import datetime
 # Collect Inputs
 urls_string = sys.argv[1]
 error_threshold = int(sys.argv[2])
-urls = urls_string.split("\n")
+urls = [url.strip().strip('"') for url in urls_string.strip().split("\n") if url.strip()]
 
 # Dictionaries to store results
 success = []
@@ -18,7 +18,7 @@ errors = []
 # Function to categorize URL response
 def check_url(url):
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers={'call_from': 'githubactiontest'})
         status_code = response.status_code
         if 200 <= status_code < 300:
             success.append(url)
